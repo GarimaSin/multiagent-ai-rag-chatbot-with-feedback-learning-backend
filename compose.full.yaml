@@ -1,0 +1,12 @@
+# Extract both ZIPs into sibling directories before using this override.
+services:
+  frontend:
+    build: ../multi-agent-ai-rag-chatbot-with-feedback-learning-frontend
+    image: multi-agent-ai-rag-chatbot-with-feedback-learning-frontend:local
+    environment:
+      API_UPSTREAM: api:8000
+    ports: ['127.0.0.1:5173:80']
+    depends_on:
+      api: {condition: service_healthy}
+    restart: unless-stopped
+    security_opt: [no-new-privileges:true]

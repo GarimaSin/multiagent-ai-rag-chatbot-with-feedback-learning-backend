@@ -1,0 +1,60 @@
+name: multi-agent-ai-rag-chatbot-with-feedback-learning
+x-backend: &backend
+  build: .
+  image: multi-agent-ai-rag-chatbot-with-feedback-learning-backend:local
+  env_file: .env
+  environment:
+    APP_ENV: production
+    DATABASE_URL: postgresql+psycopg://multi_agent_ai_rag_chatbot_with_feedback_learning:${POSTGRES_PASSWORD:?Run python scripts/setup.py first}@postgres:5432/multi_agent_ai_rag_chatbot_with_feedback_learning
+  init: true
+  read_only: true
+  tmpfs: [/tmp]
+  security_opt: [no-new-privileges:true]
+  cap_drop: [ALL]
+
+services:
+  postgres:
+    image: pgvector/pgvector:0.8.0-pg16
+    environment:
+      POSTGRES_USER: multi_agent_ai_rag_chatbot_with_feedback_learning
+      POSTGRES_DB: multi_agent_ai_rag_chatbot_with_feedback_learning
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Run python scripts/setup.py first}
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    healthcheck:
+      test: [CMD-SHELL, "pg_isready -U multi_agent_ai_rag_chatbot_with_feedback_learning -d multi_agent_ai_rag_chatbot_with_feedback_learning"]
+      interval: 5s
+      timeout: 3s
+      retries: 20
+    restart: unless-stopped
+
+  migrate:
+    <<: *backend
+    command: [python, -m, app.manage, init]
+    depends_on:
+      postgres: {condition: service_healthy}
+    restart: 'no'
+
+  api:
+    <<: *backend
+    ports: ['127.0.0.1:8000:8000']
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+    healthcheck:
+      test: [CMD, python, -c, "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health/ready', timeout=3)"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    restart: unless-stopped
+    stop_grace_period: 50s
+
+  worker:
+    <<: *backend
+    command: [python, -m, app.worker]
+    depends_on:
+      migrate: {condition: service_completed_successfully}
+    restart: unless-stopped
+    stop_grace_period: 140s
+
+volumes:
+  postgres-data:
