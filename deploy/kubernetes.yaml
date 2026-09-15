@@ -1,0 +1,71 @@
+# Deployment sketch. Set real images and create `multi-agent-ai-rag-chatbot-with-feedback-learning-config` and
+# `multi-agent-ai-rag-chatbot-with-feedback-learning-secrets` before applying. Run migrations as a separate release job.
+# Supply your managed PostgreSQL URL, TLS ingress, NetworkPolicies and backups.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: multi-agent-ai-rag-chatbot-with-feedback-learning-api
+spec:
+  replicas: 2
+  selector:
+    matchLabels: {app: multi-agent-ai-rag-chatbot-with-feedback-learning-api}
+  template:
+    metadata:
+      labels: {app: multi-agent-ai-rag-chatbot-with-feedback-learning-api}
+    spec:
+      terminationGracePeriodSeconds: 60
+      securityContext: {runAsNonRoot: true, runAsUser: 10001}
+      containers:
+        - name: api
+          image: YOUR_REGISTRY/multi-agent-ai-rag-chatbot-with-feedback-learning-backend:1.0.0
+          envFrom:
+            - configMapRef: {name: multi-agent-ai-rag-chatbot-with-feedback-learning-config}
+            - secretRef: {name: multi-agent-ai-rag-chatbot-with-feedback-learning-secrets}
+          ports: [{containerPort: 8000}]
+          resources:
+            requests: {cpu: 250m, memory: 256Mi}
+            limits: {cpu: '2', memory: 1Gi}
+          readinessProbe:
+            httpGet: {path: /health/ready, port: 8000}
+            initialDelaySeconds: 5
+          livenessProbe:
+            httpGet: {path: /health/live, port: 8000}
+            initialDelaySeconds: 10
+          securityContext:
+            allowPrivilegeEscalation: false
+            readOnlyRootFilesystem: true
+            capabilities: {drop: [ALL]}
+---
+apiVersion: v1
+kind: Service
+metadata: {name: multi-agent-ai-rag-chatbot-with-feedback-learning-api}
+spec:
+  selector: {app: multi-agent-ai-rag-chatbot-with-feedback-learning-api}
+  ports: [{port: 8000, targetPort: 8000}]
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata: {name: multi-agent-ai-rag-chatbot-with-feedback-learning-worker}
+spec:
+  replicas: 2
+  selector:
+    matchLabels: {app: multi-agent-ai-rag-chatbot-with-feedback-learning-worker}
+  template:
+    metadata:
+      labels: {app: multi-agent-ai-rag-chatbot-with-feedback-learning-worker}
+    spec:
+      terminationGracePeriodSeconds: 140
+      securityContext: {runAsNonRoot: true, runAsUser: 10001}
+      containers:
+        - name: worker
+          image: YOUR_REGISTRY/multi-agent-ai-rag-chatbot-with-feedback-learning-backend:1.0.0
+          command: [python, -m, app.worker]
+          envFrom:
+            - configMapRef: {name: multi-agent-ai-rag-chatbot-with-feedback-learning-config}
+            - secretRef: {name: multi-agent-ai-rag-chatbot-with-feedback-learning-secrets}
+          resources:
+            requests: {cpu: 250m, memory: 256Mi}
+            limits: {cpu: '2', memory: 1Gi}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities: {drop: [ALL]}
