@@ -1,0 +1,212 @@
+
+> multi-agent-ai-rag-chatbot-with-feedback-learning-frontend@1.0.0 test
+> node --test tests/*.test.mjs
+
+TAP version 13
+# Subtest: sends bearer auth and JSON
+ok 1 - sends bearer auth and JSON
+  ---
+  duration_ms: 33.142777
+  type: 'test'
+  ...
+# Subtest: handles no-content delete
+ok 2 - handles no-content delete
+  ---
+  duration_ms: 0.198939
+  type: 'test'
+  ...
+# Subtest: propagates useful API errors
+ok 3 - propagates useful API errors
+  ---
+  duration_ms: 0.914772
+  type: 'test'
+  ...
+# Subtest: streams deltas and requires final done
+ok 4 - streams deltas and requires final done
+  ---
+  duration_ms: 3.65473
+  type: 'test'
+  ...
+# Subtest: does not accept truncated response as complete
+ok 5 - does not accept truncated response as complete
+  ---
+  duration_ms: 0.580233
+  type: 'test'
+  ...
+# Subtest: error event rejects unfinished stream
+ok 6 - error event rejects unfinished stream
+  ---
+  duration_ms: 0.572604
+  type: 'test'
+  ...
+# Subtest: invalid JSON rejects
+ok 7 - invalid JSON rejects
+  ---
+  duration_ms: 0.460498
+  type: 'test'
+  ...
+# Subtest: unexpected content type rejects
+ok 8 - unexpected content type rejects
+  ---
+  duration_ms: 0.243498
+  type: 'test'
+  ...
+# Subtest: HTTP errors before streaming preserve status
+ok 9 - HTTP errors before streaming preserve status
+  ---
+  duration_ms: 0.644631
+  type: 'test'
+  ...
+# Subtest: abort signal reaches fetch
+ok 10 - abort signal reaches fetch
+  ---
+  duration_ms: 0.606916
+  type: 'test'
+  ...
+# Subtest: clear removes credential from client
+ok 11 - clear removes credential from client
+  ---
+  duration_ms: 0.155083
+  type: 'test'
+  ...
+# Subtest: project identity matches the chosen name and safe package slug
+ok 12 - project identity matches the chosen name and safe package slug
+  ---
+  duration_ms: 1.402127
+  type: 'test'
+  ...
+# Subtest: static HTML title, metadata and favicon use the full project name
+ok 13 - static HTML title, metadata and favicon use the full project name
+  ---
+  duration_ms: 8.089104
+  type: 'test'
+  ...
+# Subtest: package and lockfile metadata agree with the project slug
+ok 14 - package and lockfile metadata agree with the project slug
+  ---
+  duration_ms: 2.158611
+  type: 'test'
+  ...
+# Subtest: UI and server import shared runtime branding
+ok 15 - UI and server import shared runtime branding
+  ---
+  duration_ms: 2.996988
+  type: 'test'
+  ...
+# Subtest: only serves public files
+ok 16 - only serves public files
+  ---
+  duration_ms: 1.369044
+  type: 'test'
+  ...
+# Subtest: static server supplies security headers and rejects private paths
+ok 17 - static server supplies security headers and rejects private paths
+  ---
+  duration_ms: 56.835511
+  type: 'test'
+  ...
+# Subtest: decodes one complete event
+ok 18 - decodes one complete event
+  ---
+  duration_ms: 2.29401
+  type: 'test'
+  ...
+# Subtest: handles every possible byte split, including Unicode
+ok 19 - handles every possible byte split, including Unicode
+  ---
+  duration_ms: 4.235584
+  type: 'test'
+  ...
+# Subtest: decodes byte-by-byte stream
+ok 20 - decodes byte-by-byte stream
+  ---
+  duration_ms: 0.442989
+  type: 'test'
+  ...
+# Subtest: joins multiline data and ignores comments, retry and ID fields
+ok 21 - joins multiline data and ignores comments, retry and ID fields
+  ---
+  duration_ms: 0.269995
+  type: 'test'
+  ...
+# Subtest: does not dispatch incomplete trailing event
+ok 22 - does not dispatch incomplete trailing event
+  ---
+  duration_ms: 0.525388
+  type: 'test'
+  ...
+# Subtest: resets event type between events
+ok 23 - resets event type between events
+  ---
+  duration_ms: 0.347948
+  type: 'test'
+  ...
+# Subtest: rejects oversized event
+ok 24 - rejects oversized event
+  ---
+  duration_ms: 0.572929
+  type: 'test'
+  ...
+# Subtest: rejects malformed UTF-8
+ok 25 - rejects malformed UTF-8
+  ---
+  duration_ms: 0.223351
+  type: 'test'
+  ...
+# Subtest: append incremental tokens
+ok 26 - append incremental tokens
+  ---
+  duration_ms: 1.040482
+  type: 'test'
+  ...
+# Subtest: final answer replaces unsafe draft and its sources
+ok 27 - final answer replaces unsafe draft and its sources
+  ---
+  duration_ms: 1.879967
+  type: 'test'
+  ...
+# Subtest: status shows assigned agent
+ok 28 - status shows assigned agent
+  ---
+  duration_ms: 0.136202
+  type: 'test'
+  ...
+# Subtest: unknown event does not mutate state
+ok 29 - unknown event does not mutate state
+  ---
+  duration_ms: 0.127758
+  type: 'test'
+  ...
+# Subtest: labels do not claim factual certainty
+ok 30 - labels do not claim factual certainty
+  ---
+  duration_ms: 0.225236
+  type: 'test'
+  ...
+# Subtest: accepts text and Markdown document files
+ok 31 - accepts text and Markdown document files
+  ---
+  duration_ms: 0.291765
+  type: 'test'
+  ...
+# Subtest: rejects unsupported file extensions
+ok 32 - rejects unsupported file extensions
+  ---
+  duration_ms: 0.658898
+  type: 'test'
+  ...
+# Subtest: rejects empty, binary and oversized content
+ok 33 - rejects empty, binary and oversized content
+  ---
+  duration_ms: 22.44574
+  type: 'test'
+  ...
+1..33
+# tests 33
+# suites 0
+# pass 33
+# fail 0
+# cancelled 0
+# skipped 0
+# todo 0
+# duration_ms 252.581823

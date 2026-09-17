@@ -1,0 +1,5 @@
+PASS: Real frontend HTTP serves the renamed HTML title
+PASS: Runtime branding module is served by the frontend
+PASS: Real API exposes the renamed OpenAPI title
+
+3 live-HTTP branding checks passed.

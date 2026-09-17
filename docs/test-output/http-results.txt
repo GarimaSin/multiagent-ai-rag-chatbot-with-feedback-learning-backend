@@ -1,0 +1,10 @@
+PASS: Authentication through real HTTP
+PASS: Durable worker ingestion
+PASS: Streaming answer and citations (offline demo first token: 38.4 ms)
+PASS: Idempotent replay
+PASS: Private conversation isolation
+PASS: Consented correction, independent review and private reindexing
+PASS: Primary-source deletion withdraws learned derivative
+PASS: Conversation deletion
+
+8 real-HTTP checks passed.

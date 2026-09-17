@@ -1,0 +1,13 @@
+PASS: Login view renders actual application source
+PASS: Full project name and browser title render without login overflow at 320–1440 px
+PASS: Authentication UI transitions to workspace with fixture API
+PASS: Sidebar shows the complete project name without truncation or overflow
+PASS: Document submission UI and safe untrusted-title rendering
+PASS: Final answer replaces the draft and source quote expands
+PASS: Evidence and consent correction form submits and closes
+PASS: Mobile layout has no horizontal overflow and retains account controls
+PASS: Long assistant label fits workspace layouts at 320–1440 px
+PASS: Sign-out clears the rendered workspace
+PASS: No uncaught JavaScript errors during fixture-driven UI flow
+
+11 offline browser DOM checks passed (mock API; no navigation).

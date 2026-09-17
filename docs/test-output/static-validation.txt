@@ -1,0 +1,7 @@
+PASS: Python source syntax checked in both projects
+PASS: JavaScript and Node module syntax checked
+PASS: YAML, JSON, TOML and favicon SVG parse successfully
+PASS: Compose package paths and PostgreSQL identifiers are consistent (static validation)
+PASS: Kubernetes renamed resources and selectors are consistent (static validation)
+PASS: No remaining former-name matches in any packaged filename or file content
+PASS: Screenshots and raw test outputs refreshed; caches and local runtime artifacts removed
